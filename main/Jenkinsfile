@@ -1,25 +1,38 @@
 pipeline {
     agent any
+
     stages {
         stage('Build') {
             steps {
-                echo 'Building the project...'
+                script {
+                    echo "Building project for PES2UG22CS909"
+                    sh 'g++ hello.cpp -o PES2UG22CS909.out'
+                }
             }
         }
+
         stage('Test') {
             steps {
-                echo 'Testing the project...'
+                script {
+                    echo "Running test for PES2UG22CS909"
+                    sh './PES2UG22CS909.out'
+                }
             }
         }
+
         stage('Deploy') {
             steps {
-                echo 'Deploying the project...'
+                script {
+                    echo "Deploying project for PES2UG22CS909"
+                }
             }
         }
     }
+
     post {
         failure {
-            echo 'Pipeline failed!'
+            echo 'Pipeline failed for PES2UG22CS909'
         }
     }
 }
+
