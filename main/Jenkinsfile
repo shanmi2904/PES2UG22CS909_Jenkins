@@ -5,23 +5,25 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // This will fail due to the syntax error in hello.cpp
-                    sh 'g++ hello.cpp -o PES2UG22CS909'
+                    // This will fail if hello.cpp has a compilation error
+                    sh 'g++ hello.cpp -o hello_exec'
                 }
             }
         }
+
         stage('Test') {
             steps {
                 script {
-                    // This will fail if the build didn't generate the executable
-                    sh './PES2UG22CS909'
+                    // Run the executable and force failure if it exits with an error
+                    sh './hello_exec || exit 1'
                 }
             }
         }
+
         stage('Deploy') {
             steps {
                 script {
-                    // Force the Deploy stage to fail manually
+                    // Force the deploy stage to fail
                     sh 'exit 1'
                 }
             }
@@ -30,10 +32,7 @@ pipeline {
 
     post {
         failure {
-            echo 'Pipeline failed'
+            echo 'Pipeline failed at some stage!'
         }
     }
 }
-
-
-
