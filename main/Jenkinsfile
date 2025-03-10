@@ -5,6 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    // This will fail due to the syntax error in hello.cpp
                     sh 'g++ hello.cpp -o PES2UG22CS909'
                 }
             }
@@ -12,13 +13,17 @@ pipeline {
         stage('Test') {
             steps {
                 script {
+                    // This will fail if the build didn't generate the executable
                     sh './PES2UG22CS909'
                 }
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying the application...'
+                script {
+                    // Force the Deploy stage to fail manually
+                    sh 'exit 1'
+                }
             }
         }
     }
@@ -29,5 +34,6 @@ pipeline {
         }
     }
 }
+
 
 
