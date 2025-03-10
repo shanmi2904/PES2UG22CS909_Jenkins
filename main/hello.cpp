@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-    cout << "Hello, Jenkins Pipeline!" << endl  // Missing semicolon (compilation error)
+    cout << "Hello, Jenkins Pipeline!" << 
     return 0;
 }
 
