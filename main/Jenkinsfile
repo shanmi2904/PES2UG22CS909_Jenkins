@@ -5,34 +5,29 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo "Building project for PES2UG22CS909"
-                    sh 'g++ hello.cpp -o PES2UG22CS909.out'
+                    sh 'g++ hello.cpp -o PES2UG22CS909'
                 }
             }
         }
-
         stage('Test') {
             steps {
                 script {
-                    echo "Running test for PES2UG22CS909"
-                    sh './PES2UG22CS909.out'
+                    sh './PES2UG22CS909'
                 }
             }
         }
-
         stage('Deploy') {
             steps {
-                script {
-                    echo "Deploying project for PES2UG22CS909"
-                }
+                echo 'Deploying the application...'
             }
         }
     }
 
     post {
         failure {
-            echo 'Pipeline failed for PES2UG22CS909'
+            echo 'Pipeline failed'
         }
     }
 }
+
 
