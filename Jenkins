@@ -1,0 +1,27 @@
+pipeline {
+    agent any  // Runs on any available Jenkins agent
+
+    stages {
+        stage('Build') {  // First stage: Compile the C++ code
+            steps {
+                sh 'g++ hello.cpp -o hello_exec'  // Command to compile C++ program
+            }
+        }
+        stage('Test') {  // Second stage: Run the compiled program
+            steps {
+                sh './hello_exec'  // Execute the compiled C++ file
+            }
+        }
+        stage('Deploy') {  // Third stage: Simulate deployment
+            steps {
+                echo 'Deployment step executed'  // Just prints a message
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo 'Pipeline failed!'  // Message if any stage fails
+        }
+    }
+}
